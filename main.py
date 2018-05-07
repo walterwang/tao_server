@@ -8,7 +8,6 @@ import redis_client
 
 @app.route('/')
 def connect_server():
-
     return "Hello, world"
 
 @app.route('/update_setup', methods = ['POST'])
@@ -73,6 +72,8 @@ def post_moves():
     if 'username' in session:
         game_id = redis_client.get_gameid(session['username'])
         redis_client.add_moves(game_id, request.form['moves'])
+        return("moves posted")
+    return("not logged in")
 
 
 @app.route('/get_setup')
